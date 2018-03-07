@@ -11,7 +11,7 @@ def main():
     y = []
     c = []
 
-    with open('../../data/small.csv', newline='') as csvfile:
+    with open('../../data/s1_smaller.txt', newline='') as csvfile:
         spamreader = csv.reader(csvfile, delimiter=',')
         i = 0
         for row in spamreader:
@@ -26,29 +26,33 @@ def main():
         cache[i] = {}
 
     for i in range(len(c) - 3):
-        print(i)
         cluster_iteration(c, x, y, cache)
+        if i >= 308:
+            print(i)
+            display(x, y, c, "../../out/" + str(i) + ".png")
 
-    print(c)
     display(x, y, c, "../../out/" + str(i) + ".png")
 
 
 def display(x, y, c, name):
-    color = 60
+    color = 0
     colors = [None] * len(x)
     for cluster in c:
-        color += 60;
         if len(cluster) > 1:
-            current = color
-        else:
-            current = 0
-        for index in cluster:
-            colors[index] = current;
+            color += 1
+            print(color)
+            for index in cluster:
+                colors[index] = color
 
     fig = plt.figure(num=None, figsize=(5, 5))
     plt.scatter(x, y, c=colors)
     plt.show(name)
     plt.close(fig)
+    print('--------')
+
+    for clust in c:
+        if (len(clust) > 0):
+            print(clust)
 
 
 def cluster_iteration(cluster, x_coord, y_coord, cache):
@@ -95,7 +99,7 @@ def cluster_distance(cluster, ind1, ind2, x_coord, y_coord, cache):
             if smallest_dist == -1 or dist < smallest_dist:
                 smallest_dist = dist
 
-    # cache[ind1][ind2] = smallest_dist
+    cache[ind1][ind2] = smallest_dist
     return smallest_dist
 
 
