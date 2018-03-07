@@ -11,7 +11,7 @@ def main():
     y = []
     c = []
 
-    with open('../../data/s1_smaller.txt', newline='') as csvfile:
+    with open('../../data/dataset.csv') as csvfile:
         spamreader = csv.reader(csvfile, delimiter=',')
         i = 0
         for row in spamreader:
@@ -20,39 +20,45 @@ def main():
             c.append([i])
             i += 1
 
+    execute(x, y, c, 3, False)
+
+
+def execute(x, y, c, count_cluster, save):
     cache = [{}] * len(c)
 
     for i in range(len(c)):
         cache[i] = {}
 
-    for i in range(len(c) - 3):
+    for i in range(len(c) - count_cluster):
+        print(str(i + 1) + " / " + str(len(c) - count_cluster))
         cluster_iteration(c, x, y, cache)
-        if i >= 308:
-            print(i)
-            display(x, y, c, "../../out/" + str(i) + ".png")
 
-    display(x, y, c, "../../out/" + str(i) + ".png")
+        if save:
+            display(x, y, c, "../../out/" + str(i) + ".png", True)
+
+    display(x, y, c, "../../out/" + str(i) + ".png", False)
+    plt.show()
 
 
-def display(x, y, c, name):
+def display(x, y, c, name, save):
     color = 0
     colors = [None] * len(x)
     for cluster in c:
         if len(cluster) > 1:
             color += 1
-            print(color)
-            for index in cluster:
-                colors[index] = color
+            current = color
+        else:
+            current = 0
+        for index in cluster:
+            colors[index] = current
 
     fig = plt.figure(num=None, figsize=(5, 5))
     plt.scatter(x, y, c=colors)
-    plt.show(name)
+    if save:
+        plt.savefig(name)
+    else:
+        plt.show(name)
     plt.close(fig)
-    print('--------')
-
-    for clust in c:
-        if (len(clust) > 0):
-            print(clust)
 
 
 def cluster_iteration(cluster, x_coord, y_coord, cache):
@@ -61,7 +67,7 @@ def cluster_iteration(cluster, x_coord, y_coord, cache):
 
     for i1 in range(0, len(cluster)):
         if len(cluster[i1]) != 0:
-            for i2 in range(0, len(cluster)):
+            for i2 in range(i1, len(cluster)):
                 if len(cluster[i2]) != 0 and i1 != i2:
                     dist = cluster_distance(cluster, i1, i2, x_coord, y_coord, cache)
                     if smallest_dist == -1 or dist < smallest_dist:
@@ -86,8 +92,8 @@ def merge_cluster(cluster, i1, i2, cache):
 
 
 def cluster_distance(cluster, ind1, ind2, x_coord, y_coord, cache):
-    # if ind2 in cache[ind1]:
-    #   return cache[ind1][ind2]
+    if ind2 in cache[ind1]:
+        return cache[ind1][ind2]
 
     c1 = cluster[ind1]
     c2 = cluster[ind2]
