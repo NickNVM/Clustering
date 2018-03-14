@@ -1,11 +1,11 @@
 # Clustering
 ## Cluster selection methods
 ### Single Linkage
-![Single Linkage][single_linkage]
+<img src="https://imgur.com/ljZTg7E.png" width="300">
 ### Complete Linkage
-![Complete Linkage][complete_linkage]
+<img src="https://imgur.com/LEu6rkA.png" width="300">
 ### Average Linkage
-![Average Linkage][average_linkage]
+<img src="https://imgur.com/HOE0XaU.png" width="300">
 ## SAHN
 - Sequential agglomerative hierarchical non-overlapping clustering
 - Pseudocode implementation:
@@ -30,7 +30,3 @@ while clusters.size > left_over_clusters
 
 ```
 ## SDHN
-<img src="https://imgur.com/ljZTg7E.png" width="300">
-[single_linkage]: https://imgur.com/ljZTg7E.png | width = 100 "Single Linkage"
-[complete_linkage]: https://imgur.com/LEu6rkA.png "Complete Linkage"
-[average_linkage]: https://imgur.com/HOE0XaU.png "Average Linkage"
