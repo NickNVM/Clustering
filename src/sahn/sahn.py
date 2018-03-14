@@ -1,5 +1,5 @@
 import matplotlib
-import average_linkage as linkage
+import complete_linkage as linkage
 
 matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
@@ -11,7 +11,7 @@ def main():
     y = []
     c = []
 
-    with open('../../data/dataset.csv') as csvfile:
+    with open('../../data/smallset.csv') as csvfile:
         spamreader = csv.reader(csvfile, delimiter=',')
         i = 0
         for row in spamreader:
@@ -20,7 +20,7 @@ def main():
             c.append([i])
             i += 1
 
-    execute(x, y, c, 3, False)
+    execute(x, y, c, 3, True)
 
 
 def execute(x, y, c, count_cluster, save):
@@ -53,7 +53,7 @@ def display(x, y, c, name, save):
             colors[index] = current
 
     fig = plt.figure(num=None, figsize=(5, 5))
-    plt.scatter(x, y, c=colors)
+    plt.scatter(x, y, c=colors, s=200)
     if save:
         plt.savefig(name)
     else:
