@@ -2,14 +2,9 @@
 
 ## Cluster selection methods
 
-### Single Linkage
-<img src="https://imgur.com/ljZTg7E.png" width="300">
-
-### Complete Linkage
-<img src="https://imgur.com/LEu6rkA.png" width="300">
-
-### Average Linkage
-<img src="https://imgur.com/HOE0XaU.png" width="300">
+| Single Linkage | Complete Linkage | Average Linkage |
+|----------------|------------------|-----------------|
+| <img src="https://imgur.com/ljZTg7E.png" width="300"> | <img src="https://imgur.com/LEu6rkA.png" width="300"> | <img src="https://imgur.com/HOE0XaU.png" width="300"> |
 
 ## SAHN
 - Sequential agglomerative hierarchical non-overlapping clustering
