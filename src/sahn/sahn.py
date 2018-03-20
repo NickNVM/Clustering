@@ -1,5 +1,5 @@
 import matplotlib
-import complete_linkage as linkage
+import single_linkage as linkage
 
 matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
@@ -11,7 +11,7 @@ def main():
     y = []
     c = []
 
-    with open('../../data/smallset.csv') as csvfile:
+    with open('../../data/connectionspeed.csv') as csvfile:
         spamreader = csv.reader(csvfile, delimiter=',')
         i = 0
         for row in spamreader:
@@ -20,7 +20,7 @@ def main():
             c.append([i])
             i += 1
 
-    execute(x, y, c, 3, True)
+    execute(x, y, c, 2, False)
 
 
 def execute(x, y, c, count_cluster, save):
@@ -54,6 +54,11 @@ def display(x, y, c, name, save):
 
     fig = plt.figure(num=None, figsize=(5, 5))
     plt.scatter(x, y, c=colors, s=200)
+
+    # Labels for axis:
+    plt.xlabel("Upload in kbit/s")
+    plt.ylabel("Download in kbit/s")
+
     if save:
         plt.savefig(name)
     else:
