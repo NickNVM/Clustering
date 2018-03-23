@@ -29,4 +29,3 @@ while clusters.size > left_over_clusters
   remove cluster2 from clusters
 
 ```
-## SDHN
